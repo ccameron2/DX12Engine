@@ -27,9 +27,9 @@ public:
 	void Draw(ID3D12GraphicsCommandList* commandList);
 
 	// Set transform components
-	void SetPosition(XMFLOAT3 position, bool update = true);
-	void SetRotation(XMFLOAT3 rotation, bool update = true);
-	void SetScale(XMFLOAT3 scale, bool update = true);
+	void SetPosition(XMFLOAT3 position, bool Update = true);
+	void SetRotation(XMFLOAT3 rotation, bool Update = true);
+	void SetScale(XMFLOAT3 scale, bool Update = true);
 
 	// Mesh passed in the constructor
 	Mesh* mConstructorMesh;

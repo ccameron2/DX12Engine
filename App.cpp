@@ -55,7 +55,7 @@ void App::Initialize()
 
 	CreateSkybox();
 
-	mNumModels = mModels.size();
+	mNumModels = mModels.size() - 1;
 
 	// Index materials and add to list
 	CreateMaterials();
@@ -96,71 +96,28 @@ void App::StartFrame()
 	}
 }
 
+void App::CreateLandscape()
+{
+	auto commandList = mGraphics->mCommandList.Get();
+
+	mTerrainManager = new ChunkManager(commandList);
+	mTerrainManager->Update(XMFLOAT3{0,0,0});
+}
+
 void App::LoadModels()
 {
 	auto commandList = mGraphics->mCommandList.Get();
 
 	// Multiple meshes, full PBR textured per mesh
 
-	Model* boatModel = new Model("Models/Boat1.fbx", commandList);
+	Model* model = new Model("Models/polyfox.fbx", commandList);
 
-	boatModel->SetPosition(XMFLOAT3{ -18.0f, 0.0f, 0.0f });
-	boatModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
-	boatModel->SetScale(XMFLOAT3{ 0.2f, 0.2f, 0.2f });
-	mModels.push_back(boatModel);
+	model->SetPosition(XMFLOAT3{ 0.0f, 1.0f, 0.0f });
+	model->SetRotation(XMFLOAT3{ 0.0f, 3.14f, 0.0f });
+	model->SetScale(XMFLOAT3{ 0.01f, 0.01f, 0.01f });
+	mModels.push_back(model);
 
-	Model* plasmaModel = new Model("Models/plasmarifle.fbx", commandList);
-
-	plasmaModel->SetPosition(XMFLOAT3{ -14.0f, 0.0f, 0.0f });
-	plasmaModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
-	plasmaModel->SetScale(XMFLOAT3{ 0.005f, 0.005f, 0.005f });
-	mModels.push_back(plasmaModel);
-
-	// PBR per model texture display models
-	Model* octoModel = new Model("Models/octopus.x", commandList, nullptr, "pjemy");
-
-	octoModel->SetPosition(XMFLOAT3{ -6.0f, 0.0f, 0.0f });
-	octoModel->SetRotation(XMFLOAT3{ -1.2f, 0.0f, 0.0f });
-	octoModel->SetScale(XMFLOAT3{ 0.5f, 0.5f, 0.5f });
-	mModels.push_back(octoModel);
-
-	Model* octoModel2 = new Model("Models/octopus.x", commandList, nullptr, "tufted-leather");
-
-	octoModel2->SetPosition(XMFLOAT3{ -10.0f, 0.0f, 0.0f });
-	octoModel2->SetRotation(XMFLOAT3{ -1.2f, 0.0f, 0.0f });
-	octoModel2->SetScale(XMFLOAT3{ 0.5f, 0.5f, 0.5f });
-	mModels.push_back(octoModel2);
-
-	Model* rockModel = new Model("Models/Rock.fbx", commandList);
-
-	rockModel->SetPosition(XMFLOAT3{ -22.0f, 0.0f, 0.0f });
-	rockModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
-	rockModel->SetScale(XMFLOAT3{ 0.05f, 0.05f, 0.05f });
-	mModels.push_back(rockModel);
-
-	// Base material colour models
-	Model* foxModel = new Model("Models/polyfox.fbx", commandList);
-
-	foxModel->SetPosition(XMFLOAT3{ 4.0f, 0.0f, 0.0f });
-	foxModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
-	foxModel->SetScale(XMFLOAT3{ 0.01f, 0.01f, 0.01f });
-	mModels.push_back(foxModel);
-
-	Model* wolfModel = new Model("Models/Wolf.fbx", commandList);
-
-	wolfModel->SetPosition(XMFLOAT3{ 6.0f, 0.0f, 0.0f });
-	wolfModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
-	wolfModel->SetScale(XMFLOAT3{ 0.01f, 0.01f, 0.01f });
-
-	mModels.push_back(wolfModel);
-
-	Model* slimeModel = new Model("Models/PolyFrog.fbx", commandList);
-
-	slimeModel->SetPosition(XMFLOAT3{ 9.0f, 0.0f, 0.0f });
-	slimeModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
-	slimeModel->SetScale(XMFLOAT3{ 0.0015f, 0.0015f, 0.0015f });
-
-	mModels.push_back(slimeModel);
+	CreateLandscape();
 
 	// Sort models by PSO
 	int index = 0;
@@ -193,7 +150,24 @@ void App::LoadModels()
 		index++;
 	}
 
-	// Water and sky are rendered independently
+	//// Terrain and sky are rendered independently
+	//mTerrainModel->SetPosition(XMFLOAT3{ float(-mTerrain->mSize / 2) * mTerrain->mSpacing, -20.0f, float(-mTerrain->mSize / 2) * mTerrain->mSpacing });
+	//mTerrainModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
+	//mTerrainModel->SetScale(XMFLOAT3{ 1, 1, 1 });
+	//mTerrainModel->mObjConstantBufferIndex = index;
+	//mModels.push_back(mTerrainModel);
+	//index++;
+
+	mTerrainManager->mObjConstBufferIndex = index;
+	mTerrainManager->Update(mCamera->mPos);
+
+	for (auto& model : mTerrainManager->mSpawnedChunkModels)
+	{
+		model->mObjConstantBufferIndex = index;
+		index++;
+		mModels.push_back(model);
+	}
+
 
 	// Skybox
 	mSkyModel = new Model("Models/sphere.x", commandList);
@@ -202,9 +176,7 @@ void App::LoadModels()
 	mSkyModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
 	mSkyModel->SetScale(XMFLOAT3{ 1, 1, 1 });
 	mSkyModel->mObjConstantBufferIndex = index;
-
 	mModels.push_back(mSkyModel);
-
 }
 
 void App::BuildFrameResources()
@@ -274,7 +246,7 @@ void App::CreateSkybox()
 void App::Update(float frameTime)
 {
 	// Update GUI
-	mGUI->UpdateModelData(mModels[mGUI->mSelectedModel]);
+	mGUI->UpdateModelData(mModels[mGUI->mSelectedModel + 1]);
 	mGUI->Update(mNumModels);
 
 	// Update Camera
@@ -486,6 +458,11 @@ void App::Draw(float frameTime)
 	mGraphics->SetViewportAndScissorRects(commandList);
 	mGraphics->SetMSAARenderTarget(commandList);
 
+	if (mWireframe) commandList->SetPipelineState(mGraphics->mWireframePSO.Get());
+	else commandList->SetPipelineState(mGraphics->mPlanetPSO.Get());
+
+	mTerrainManager->Draw(commandList);
+
 	// Set skybox pipeline state for sky 
 	commandList->SetPipelineState(mGraphics->mSkyPSO.Get());
 	mSkyModel->Draw(commandList);
@@ -641,7 +618,6 @@ void App::CreateMaterials()
 			mCurrentMatCBIndex++;
 		}
 	}
-
 }
 
 App::~App()

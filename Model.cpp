@@ -128,22 +128,22 @@ void Model::Draw(ID3D12GraphicsCommandList* commandList)
 	}
 }
 
-void Model::SetPosition(XMFLOAT3 position, bool update)
+void Model::SetPosition(XMFLOAT3 position, bool Update)
 {
 	mPosition = position;
-	if(update) UpdateWorldMatrix();
+	if(Update) UpdateWorldMatrix();
 }
 
-void Model::SetRotation(XMFLOAT3 rotation, bool update)
+void Model::SetRotation(XMFLOAT3 rotation, bool Update)
 {
 	mRotation = rotation;
-	if (update) UpdateWorldMatrix();
+	if (Update) UpdateWorldMatrix();
 }
 
-void Model::SetScale(XMFLOAT3 scale, bool update)
+void Model::SetScale(XMFLOAT3 scale, bool Update)
 {
 	mScale = scale;
-	if (update) UpdateWorldMatrix();
+	if (Update) UpdateWorldMatrix();
 }
 
 void Model::ProcessNode(aiNode* node, const aiScene* scene)
@@ -262,7 +262,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 	auto texIndex = 0;
 
 	// Test for albedo map using model name
-	newMesh->mTextures[texIndex]->Path = matName + L"-albedo.dds";
+	newMesh->mTextures[texIndex]->Path = matName + L"_albedo.dds";
 	CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 	
 	// If texture found, set DDS to true and set model as textured per model.
@@ -276,12 +276,12 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 	if (!mDDS)
 	{
 		// Test jpg
-		newMesh->mTextures[texIndex]->Path = matName + L"-albedo.jpg";
+		newMesh->mTextures[texIndex]->Path = matName + L"_albedo.jpg";
 		CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		if (!newMesh->mTextures[texIndex]->Resource)
 		{
 			// Test png
-			newMesh->mTextures[texIndex]->Path = matName + L"-albedo.png";
+			newMesh->mTextures[texIndex]->Path = matName + L"_albedo.png";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 			if (!newMesh->mTextures[texIndex]->Resource)
 			{
@@ -329,17 +329,17 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-roughness.dds";
+			newMesh->mTextures[texIndex]->Path = matName + L"_roughness.dds";
 			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mJPG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-roughness.jpg";
+			newMesh->mTextures[texIndex]->Path = matName + L"_roughness.jpg";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), true);
 		}
 		else if(mPNG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-roughness.png";
+			newMesh->mTextures[texIndex]->Path = matName + L"_roughness.png";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), true);
 		}
 
@@ -373,17 +373,17 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-normal.dds";
+			newMesh->mTextures[texIndex]->Path = matName + L"_normal.dds";
 			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mJPG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-normal.jpg";
+			newMesh->mTextures[texIndex]->Path = matName + L"_normal.jpg";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mPNG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-normal.png";
+			newMesh->mTextures[texIndex]->Path = matName + L"_normal.png";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 
@@ -419,17 +419,17 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-metalness.dds";
+			newMesh->mTextures[texIndex]->Path = matName + L"_metalness.dds";
 			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mJPG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-metalness.jpg";
+			newMesh->mTextures[texIndex]->Path = matName + L"_metalness.jpg";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mPNG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-metalness.png";
+			newMesh->mTextures[texIndex]->Path = matName + L"_metalness.png";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		
@@ -462,17 +462,17 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-height.dds";
+			newMesh->mTextures[texIndex]->Path = matName + L"_height.dds";
 			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mJPG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-height.jpg";
+			newMesh->mTextures[texIndex]->Path = matName + L"_height.jpg";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mPNG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-height.png";
+			newMesh->mTextures[texIndex]->Path = matName + L"_height.png";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 
@@ -507,17 +507,17 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-ao.dds";
+			newMesh->mTextures[texIndex]->Path = matName + L"_ao.dds";
 			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mJPG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-ao.jpg";
+			newMesh->mTextures[texIndex]->Path = matName + L"_ao.jpg";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mPNG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-ao.png";
+			newMesh->mTextures[texIndex]->Path = matName + L"_ao.png";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 
@@ -551,17 +551,17 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-emissive.dds";
+			newMesh->mTextures[texIndex]->Path = matName + L"_emissive.dds";
 			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mJPG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-emissive.jpg";
+			newMesh->mTextures[texIndex]->Path = matName + L"_emissive.jpg";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 		else if (mPNG)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"-emissive.png";
+			newMesh->mTextures[texIndex]->Path = matName + L"_emissive.png";
 			CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
 		}
 
@@ -646,7 +646,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 				
 				string str = mDirectory + "/" + materialName.C_Str();
 				wstring wstr(str.begin(), str.end());
-				newMesh->mTextures[texIndex]->Path = wstr + L"-albedo.dds";				
+				newMesh->mTextures[texIndex]->Path = wstr + L"_albedo.dds";				
 				
 
 				if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
@@ -666,7 +666,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 				if (!mDDS)
 				{
 					// Test jpg
-					newMesh->mTextures[texIndex]->Path = wstr + L"-albedo.jpg";
+					newMesh->mTextures[texIndex]->Path = wstr + L"_albedo.jpg";
 					if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 					{
 						CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -674,7 +674,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 					if (!newMesh->mTextures[texIndex]->Resource)
 					{
 						// Test png
-						newMesh->mTextures[texIndex]->Path = wstr + L"-albedo.png";
+						newMesh->mTextures[texIndex]->Path = wstr + L"_albedo.png";
 						if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 						{
 							CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -721,7 +721,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 					// Load correct file type
 					if (mDDS)
 					{
-						newMesh->mTextures[texIndex]->Path = wstr + L"-roughness.dds";
+						newMesh->mTextures[texIndex]->Path = wstr + L"_roughness.dds";
 						if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 						{
 							CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -729,7 +729,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 					}
 					else if (mJPG)
 					{
-						newMesh->mTextures[texIndex]->Path = wstr + L"-roughness.jpg";
+						newMesh->mTextures[texIndex]->Path = wstr + L"_roughness.jpg";
 						if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 						{
 							CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), true);
@@ -737,7 +737,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 					}
 					else if (mPNG)
 					{
-						newMesh->mTextures[texIndex]->Path = wstr + L"-roughness.png";
+						newMesh->mTextures[texIndex]->Path = wstr + L"_roughness.png";
 						if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 						{
 							CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), true);
@@ -775,7 +775,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						// Load correct file type
 						if (mDDS)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-normal.dds";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_normal.dds";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -783,7 +783,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mJPG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-normal.jpg";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_normal.jpg";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -791,7 +791,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mPNG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-normal.png";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_normal.png";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -830,7 +830,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						// Load correct file type
 						if (mDDS)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-metalness.dds";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_metalness.dds";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -838,7 +838,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mJPG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-metalness.jpg";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_metalness.jpg";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -846,7 +846,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mPNG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-metalness.png";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_metalness.png";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -883,7 +883,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						// Load correct file type
 						if (mDDS)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-height.dds";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_height.dds";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -891,7 +891,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mJPG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-height.jpg";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_height.jpg";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -899,7 +899,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mPNG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-height.png";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_height.png";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -938,7 +938,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						// Load correct file type
 						if (mDDS)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-ao.dds";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_ao.dds";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -946,7 +946,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mJPG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-ao.jpg";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_ao.jpg";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -954,7 +954,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mPNG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-ao.png";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_ao.png";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex])) 
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -992,7 +992,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						// Load correct file type
 						if (mDDS)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-emissive.dds";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_emissive.dds";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -1000,7 +1000,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mJPG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-emissive.jpg";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_emissive.jpg";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
@@ -1008,7 +1008,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 						}
 						else if (mPNG)
 						{
-							newMesh->mTextures[texIndex]->Path = wstr + L"-emissive.png";
+							newMesh->mTextures[texIndex]->Path = wstr + L"_emissive.png";
 							if (!CheckTextureLoaded(newMesh->mTextures[texIndex]))
 							{
 								CreateWICTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);

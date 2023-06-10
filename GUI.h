@@ -43,7 +43,7 @@ public:
 
 	// Report data
 	bool mWMatrixChanged = false;
-	int mSelectedModel = 1;
+	int mSelectedModel = 0;
 	bool mPlanetUpdated = false;
 
 };

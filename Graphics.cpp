@@ -469,8 +469,8 @@ void Graphics::CreateShaders()
 	mSimpleTexPSByteCode = CompileShader(L"Shaders\\simpletexshader.hlsl", nullptr, "PS", "ps_5_1");
 
 	// Compile planet shaders
-	mPlanetVSByteCode = CompileShader(L"Shaders\\planetshader.hlsl", nullptr, "VS", "vs_5_1");
-	mPlanetPSByteCode = CompileShader(L"Shaders\\planetshader.hlsl", nullptr, "PS", "ps_5_1");
+	mPlanetVSByteCode = CompileShader(L"Shaders\\terrainshader.hlsl", nullptr, "VS", "vs_5_1");
+	mPlanetPSByteCode = CompileShader(L"Shaders\\terrainshader.hlsl", nullptr, "PS", "ps_5_1");
 
 	// Compile sky shaders
 	mSkyVSByteCode = CompileShader(L"Shaders\\skyshader.hlsl", nullptr, "VS", "vs_5_1");

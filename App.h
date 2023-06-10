@@ -45,6 +45,8 @@
 #include "UploadBuffer.h"
 #include "FrameResource.h"
 #include "SRVDescriptorHeap.h"
+#include "TerrainTile.h"
+#include "ChunkManager.h"
 
 #include <fstream>
 
@@ -106,6 +108,8 @@ private:
 	// GUI object
 	unique_ptr<GUI> mGUI;
 
+	ChunkManager* mTerrainManager;
+
 	// Light values
 	float mSunTheta = 1.25f * XM_PI;
 	float mSunPhi = XM_PIDIV4;
@@ -116,6 +120,7 @@ private:
 	// Current material index
 	int mCurrentMatCBIndex = 0;
 
+	void CreateLandscape();
 	void LoadModels();
 	void UpdateSelectedModel();
 	void UpdatePerObjectConstantBuffers();

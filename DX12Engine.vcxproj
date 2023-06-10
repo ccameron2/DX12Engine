@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ChunkManager.cpp" />
     <ClCompile Include="SRVDescriptorHeap.cpp" />
     <ClCompile Include="FrameResource.cpp" />
     <ClCompile Include="App.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="TerrainTile.cpp" />
     <ClCompile Include="TriangleChunk.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -158,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ChunkManager.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="SRVDescriptorHeap.h" />
     <ClInclude Include="FastNoiseLite.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="TerrainTile.h" />
     <ClInclude Include="TriangleChunk.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="UploadBuffer.h" />
@@ -178,6 +182,7 @@
     <FxCompile Include="Shaders\common.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.1</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shaders\planetshader.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -199,6 +204,10 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Shaders\terrainshader.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Shaders\texshader.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
