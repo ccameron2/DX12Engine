@@ -21,23 +21,27 @@ void TerrainChunk::CreateMeshGeometry(ID3D12GraphicsCommandList* commandList)
     GenerateGrid(mSize,mSpacing,mVertices,mTriangles);
     ApplyNoise(0.35,6,mVertices);
 
-    mMesh->mVertices.resize(mVertices.size());
     mMesh->mIndices.resize(mTriangles.size() * 3);
 
     int index = 0;
-    for (auto& vertex : mVertices)
-    {
-        mMesh->mVertices[index].Pos = AddFloat3(vertex,mPosition).Pos;
-        index++;
-    }
-
-    index = 0;
     for (auto& triangle : mTriangles)
     {
         mMesh->mIndices[index] = triangle.Point[0];
         mMesh->mIndices[index + 1] = triangle.Point[1];
         mMesh->mIndices[index + 2] = triangle.Point[2];
         index += 3;
+    }
+
+    auto normals = CalculateNormals(mVertices, mMesh->mIndices);
+
+    mMesh->mVertices.resize(mVertices.size());
+
+    index = 0;
+    for (auto& vertex : mVertices)
+    {
+        mMesh->mVertices[index].Pos = AddFloat3(vertex,mPosition).Pos;
+        mMesh->mVertices[index].Normal = normals[index];
+        index++;
     }
 
     mMesh->CalculateBufferData(D3DDevice.Get(),commandList);

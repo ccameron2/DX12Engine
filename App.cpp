@@ -55,7 +55,7 @@ void App::Initialize()
 
 	CreateSkybox();
 
-	mNumModels = mModels.size() - 1;
+	mNumModels = mModels.size();
 
 	// Index materials and add to list
 	CreateMaterials();
@@ -100,8 +100,11 @@ void App::CreateLandscape()
 {
 	auto commandList = mGraphics->mCommandList.Get();
 
-	mTerrainManager = new ChunkManager(commandList);
-	mTerrainManager->Update(XMFLOAT3{0,0,0});
+	FastNoiseLite* noise = new FastNoiseLite();
+	noise->SetNoiseType(FastNoiseLite::NoiseType_Perlin);
+	mTerrain = new TerrainChunk(commandList, noise, XMFLOAT3(0, 0, 0));
+	
+	delete noise;
 }
 
 void App::LoadModels()
@@ -112,12 +115,126 @@ void App::LoadModels()
 
 	Model* model = new Model("Models/polyfox.fbx", commandList);
 
-	model->SetPosition(XMFLOAT3{ 0.0f, 1.0f, 0.0f });
+	model->SetPosition(XMFLOAT3{ 0.0f, 10.0f, 0.0f });
 	model->SetRotation(XMFLOAT3{ 0.0f, 3.14f, 0.0f });
 	model->SetScale(XMFLOAT3{ 0.01f, 0.01f, 0.01f });
 	mModels.push_back(model);
 
+	model = new Model("Models/octopus.x", commandList, nullptr, "pjemy");
+
+	model->SetPosition(XMFLOAT3{ 10.0f, 8.0f, 0.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "tufted-leather");
+
+	model->SetPosition(XMFLOAT3{ 20.0f, 8.0f, 0.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "octostone");
+
+	model->SetPosition(XMFLOAT3{ 30.0f, 8.0f, 0.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "galvanizedmetal");
+
+	model->SetPosition(XMFLOAT3{ 40.0f, 8.0f, 0.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "copper-rock1");
+
+	model->SetPosition(XMFLOAT3{ 10.0f, 8.0f, 10.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "painted-concrete");
+
+	model->SetPosition(XMFLOAT3{ 20.0f, 8.0f, 10.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "marblefloortiles1");
+
+	model->SetPosition(XMFLOAT3{ 30.0f, 8.0f, 10.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "pjdto2");
+
+	model->SetPosition(XMFLOAT3{ 40.0f, 8.0f, 10.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "rusted-iron2");
+
+	model->SetPosition(XMFLOAT3{ 10.0f, 8.0f, 20.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "scuffed-plastic");
+
+	model->SetPosition(XMFLOAT3{ 20.0f, 8.0f, 20.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "subway-floor");
+
+	model->SetPosition(XMFLOAT3{ 30.0f, 8.0f, 20.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "synth-rubber");
+
+	model->SetPosition(XMFLOAT3{ 40.0f, 8.0f, 20.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "threadplatefloor");
+
+	model->SetPosition(XMFLOAT3{ 10.0f, 8.0f, 30.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "bamboo-wood-semigloss");
+
+	model->SetPosition(XMFLOAT3{ 20.0f, 8.0f, 30.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "greasy-pan-2");
+
+	model->SetPosition(XMFLOAT3{ 30.0f, 8.0f, 30.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
+	model = new Model("Models/octopus.x", commandList, nullptr, "harshbricks");
+
+	model->SetPosition(XMFLOAT3{ 40.0f, 8.0f, 30.0f });
+	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
+	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
+	mModels.push_back(model);
+
 	CreateLandscape();
+
+	mTerrainModel = new Model("", commandList, mTerrain->mMesh);
 
 	// Sort models by PSO
 	int index = 0;
@@ -150,23 +267,20 @@ void App::LoadModels()
 		index++;
 	}
 
-	//// Terrain and sky are rendered independently
-	//mTerrainModel->SetPosition(XMFLOAT3{ float(-mTerrain->mSize / 2) * mTerrain->mSpacing, -20.0f, float(-mTerrain->mSize / 2) * mTerrain->mSpacing });
-	//mTerrainModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
-	//mTerrainModel->SetScale(XMFLOAT3{ 1, 1, 1 });
-	//mTerrainModel->mObjConstantBufferIndex = index;
-	//mModels.push_back(mTerrainModel);
-	//index++;
+	// Terrain and sky are rendered independently
+	mTerrainModel->SetPosition(XMFLOAT3{ float(-mTerrain->mSize / 2) * mTerrain->mSpacing, -20.0f, float(-mTerrain->mSize / 2) * mTerrain->mSpacing });
+	mTerrainModel->SetRotation(XMFLOAT3{ 0.0f, 0.0f, 0.0f });
+	mTerrainModel->SetScale(XMFLOAT3{ 1, 1, 1 });
+	mTerrainModel->mObjConstantBufferIndex = index;
+	mModels.push_back(mTerrainModel);
+	index++;
 
-	mTerrainManager->mObjConstBufferIndex = index;
-	mTerrainManager->Update(mCamera->mPos);
-
-	for (auto& model : mTerrainManager->mSpawnedChunkModels)
-	{
-		model->mObjConstantBufferIndex = index;
-		index++;
-		mModels.push_back(model);
-	}
+	//for (auto& model : mTerrainManager->mSpawnedChunkModels)
+	//{
+	//	model->mObjConstantBufferIndex = index;
+	//	index++;
+	//	mModels.push_back(model);
+	//}
 
 
 	// Skybox
@@ -246,7 +360,7 @@ void App::CreateSkybox()
 void App::Update(float frameTime)
 {
 	// Update GUI
-	mGUI->UpdateModelData(mModels[mGUI->mSelectedModel + 1]);
+	mGUI->UpdateModelData(mModels[mGUI->mSelectedModel]);
 	mGUI->Update(mNumModels);
 
 	// Update Camera
@@ -461,7 +575,7 @@ void App::Draw(float frameTime)
 	if (mWireframe) commandList->SetPipelineState(mGraphics->mWireframePSO.Get());
 	else commandList->SetPipelineState(mGraphics->mPlanetPSO.Get());
 
-	mTerrainManager->Draw(commandList);
+	mTerrainModel->Draw(commandList);
 
 	// Set skybox pipeline state for sky 
 	commandList->SetPipelineState(mGraphics->mSkyPSO.Get());

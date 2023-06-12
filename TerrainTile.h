@@ -11,7 +11,7 @@ public:
 	~TerrainChunk();
 	Mesh* mMesh;
 	int mSize = 100;
-	float mSpacing = 5.0f;
+	float mSpacing = 2.0f;
 	XMFLOAT3 mPosition;
 private:
 	void CreateMeshGeometry(ID3D12GraphicsCommandList* commandList);

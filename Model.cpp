@@ -21,6 +21,7 @@ Model::Model(std::string fileName, ID3D12GraphicsCommandList* commandList, Mesh*
 			aiProcess_SortByPType |
 			aiProcess_FindInvalidData |
 			aiProcess_PreTransformVertices |
+			aiProcess_MakeLeftHanded |
 			//aiProcess_OptimizeMeshes |
 			//aiProcess_OptimizeGraph |
 			//aiProcess_FlipUVs |
@@ -262,8 +263,11 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 	auto texIndex = 0;
 
 	// Test for albedo map using model name
-	newMesh->mTextures[texIndex]->Path = matName + L"_albedo.dds";
-	CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
+	newMesh->mTextures[texIndex]->Path = matName + L"-albedo.dds";
+	DDS_ALPHA_MODE mode = DDS_ALPHA_MODE_OPAQUE;
+	CreateDDSTextureFromFileEx(D3DDevice.Get(), upload, newMesh->mTextures[texIndex]->Path.c_str(), 0, D3D12_RESOURCE_FLAG_NONE,
+		(DirectX::DX12::DDS_LOADER_FLAGS)(DirectX::DX12::DDS_LOADER_DEFAULT) | DirectX::DX12::DDS_LOADER_MIP_AUTOGEN,
+		newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), &mode, false);
 	
 	// If texture found, set DDS to true and set model as textured per model.
 	if (newMesh->mTextures[texIndex]->Resource != nullptr)
@@ -328,9 +332,12 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 
 		// Load correct file type
 		if (mDDS)
-		{
-			newMesh->mTextures[texIndex]->Path = matName + L"_roughness.dds";
-			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
+		{			
+			newMesh->mTextures[texIndex]->Path = matName + L"-roughness.dds";
+			DDS_ALPHA_MODE mode = DDS_ALPHA_MODE_OPAQUE;
+			CreateDDSTextureFromFileEx(D3DDevice.Get(), upload, newMesh->mTextures[texIndex]->Path.c_str(), 0, D3D12_RESOURCE_FLAG_NONE,
+				(DirectX::DX12::DDS_LOADER_FLAGS)(DirectX::DX12::DDS_LOADER_DEFAULT) | DirectX::DX12::DDS_LOADER_MIP_AUTOGEN,
+				newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), &mode, false);
 		}
 		else if (mJPG)
 		{
@@ -373,8 +380,11 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"_normal.dds";
-			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
+			newMesh->mTextures[texIndex]->Path = matName + L"-normal.dds";
+			DDS_ALPHA_MODE mode = DDS_ALPHA_MODE_OPAQUE;
+			CreateDDSTextureFromFileEx(D3DDevice.Get(), upload, newMesh->mTextures[texIndex]->Path.c_str(), 0, D3D12_RESOURCE_FLAG_NONE,
+				(DirectX::DX12::DDS_LOADER_FLAGS)(DirectX::DX12::DDS_LOADER_DEFAULT) | DirectX::DX12::DDS_LOADER_MIP_AUTOGEN,
+				newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), &mode, false);
 		}
 		else if (mJPG)
 		{
@@ -419,8 +429,11 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"_metalness.dds";
-			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
+			newMesh->mTextures[texIndex]->Path = matName + L"-metalness.dds";
+			DDS_ALPHA_MODE mode = DDS_ALPHA_MODE_OPAQUE;
+			CreateDDSTextureFromFileEx(D3DDevice.Get(), upload, newMesh->mTextures[texIndex]->Path.c_str(), 0, D3D12_RESOURCE_FLAG_NONE,
+				(DirectX::DX12::DDS_LOADER_FLAGS)(DirectX::DX12::DDS_LOADER_DEFAULT) | DirectX::DX12::DDS_LOADER_MIP_AUTOGEN,
+				newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), &mode, false);
 		}
 		else if (mJPG)
 		{
@@ -462,8 +475,11 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"_height.dds";
-			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
+			newMesh->mTextures[texIndex]->Path = matName + L"-height.dds";
+			DDS_ALPHA_MODE mode = DDS_ALPHA_MODE_OPAQUE;
+			CreateDDSTextureFromFileEx(D3DDevice.Get(), upload, newMesh->mTextures[texIndex]->Path.c_str(), 0, D3D12_RESOURCE_FLAG_NONE,
+				(DirectX::DX12::DDS_LOADER_FLAGS)(DirectX::DX12::DDS_LOADER_DEFAULT) | DirectX::DX12::DDS_LOADER_MIP_AUTOGEN,
+				newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), &mode, false);
 		}
 		else if (mJPG)
 		{
@@ -507,8 +523,11 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"_ao.dds";
-			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
+			newMesh->mTextures[texIndex]->Path = matName + L"-ao.dds";
+			DDS_ALPHA_MODE mode = DDS_ALPHA_MODE_OPAQUE;
+			CreateDDSTextureFromFileEx(D3DDevice.Get(), upload, newMesh->mTextures[texIndex]->Path.c_str(), 0, D3D12_RESOURCE_FLAG_NONE,
+				(DirectX::DX12::DDS_LOADER_FLAGS)(DirectX::DX12::DDS_LOADER_DEFAULT) | DirectX::DX12::DDS_LOADER_MIP_AUTOGEN,
+				newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), &mode, false);
 		}
 		else if (mJPG)
 		{
@@ -551,8 +570,11 @@ Mesh* Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		// Load correct file type
 		if (mDDS)
 		{
-			newMesh->mTextures[texIndex]->Path = matName + L"_emissive.dds";
-			CreateDDSTextureFromFile(device, upload, newMesh->mTextures[texIndex]->Path.c_str(), newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), false);
+			newMesh->mTextures[texIndex]->Path = matName + L"-emissive.dds";
+			DDS_ALPHA_MODE mode = DDS_ALPHA_MODE_OPAQUE;
+			CreateDDSTextureFromFileEx(D3DDevice.Get(), upload, newMesh->mTextures[texIndex]->Path.c_str(), 0, D3D12_RESOURCE_FLAG_NONE,
+				(DirectX::DX12::DDS_LOADER_FLAGS)(DirectX::DX12::DDS_LOADER_DEFAULT) | DirectX::DX12::DDS_LOADER_MIP_AUTOGEN,
+				newMesh->mTextures[texIndex]->Resource.ReleaseAndGetAddressOf(), &mode, false);
 		}
 		else if (mJPG)
 		{

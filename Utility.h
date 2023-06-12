@@ -305,7 +305,7 @@ static float FractalBrownianMotion(FastNoiseLite* fastNoise, XMFLOAT3 fractalInp
 }
 
 // Calculate normals on an array of vertices and indices
-static std::vector<XMFLOAT3> CalculateNormals(std::vector<Vertex> vertices, std::vector<uint32_t> indices)
+static std::vector<XMFLOAT3> CalculateNormals(std::vector<XMFLOAT3> vertices, std::vector<uint32_t> indices)
 {
 	std::vector<XMFLOAT3> normals;
 
@@ -370,9 +370,9 @@ static std::vector<XMFLOAT3> CalculateNormals(std::vector<Vertex> vertices, std:
 			auto C = vertices[NTriangles[triangle].z];
 
 			// Calculate edges
-			auto a = XMLoadFloat3(&A.Pos);
-			auto b = XMLoadFloat3(&B.Pos);
-			auto c = XMLoadFloat3(&C.Pos);
+			auto a = XMLoadFloat3(&A);
+			auto b = XMLoadFloat3(&B);
+			auto c = XMLoadFloat3(&C);
 
 			auto E1 = XMVectorSubtract(a, c);
 			auto E2 = XMVectorSubtract(b, c);

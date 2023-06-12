@@ -52,21 +52,20 @@ float4 PS(VOut pIn) : SV_Target
     
 	float3 albedo;
     
-    // Determine the terrain type based on steepness
 	if (steepness < stoneThreshold)
 	{
-        // Stone terrain
-		albedo = float3(0.55f, 0.55f, 0.55f); // Gray color for stone
+		// Stone terrain
+		albedo = float3(0.5f, 0.5f, 0.5f); // Gray color for space rock
 	}
 	else if (steepness < dirtThreshold)
 	{
-        // Dirt terrain
-		albedo = float3(0.7f, 0.45f, 0.3f); // Brown color for dirt
+		// Dirt terrain
+		albedo = float3(0.4f, 0.4f, 0.4f); // Dark gray color for space rock
 	}
 	else
 	{
-        // Grass terrain
-		albedo = float3(0.25f, 0.7f, 0.25f); // Green color for grass
+		// Grass terrain
+		albedo = float3(0.3f, 0.3f, 0.3f); // Dark gray color for space surface
 	}
     
     // Set roughness, metalness, and AO to constant values

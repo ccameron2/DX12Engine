@@ -108,7 +108,8 @@ private:
 	// GUI object
 	unique_ptr<GUI> mGUI;
 
-	ChunkManager* mTerrainManager;
+	TerrainChunk* mTerrain;
+	Model* mTerrainModel;
 
 	// Light values
 	float mSunTheta = 1.25f * XM_PI;
