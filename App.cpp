@@ -122,112 +122,112 @@ void App::LoadModels()
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "pjemy");
 
-	model->SetPosition(XMFLOAT3{ 10.0f, 8.0f, 0.0f });
+	model->SetPosition(XMFLOAT3{ 10.0f, 5.0f, 0.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "tufted-leather");
 
-	model->SetPosition(XMFLOAT3{ 20.0f, 8.0f, 0.0f });
+	model->SetPosition(XMFLOAT3{ 20.0f, 5.0f, 0.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "octostone");
 
-	model->SetPosition(XMFLOAT3{ 30.0f, 8.0f, 0.0f });
+	model->SetPosition(XMFLOAT3{ 30.0f, 5.0f, 0.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "galvanizedmetal");
 
-	model->SetPosition(XMFLOAT3{ 40.0f, 8.0f, 0.0f });
+	model->SetPosition(XMFLOAT3{ 40.0f, 5.0f, 0.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "copper-rock1");
 
-	model->SetPosition(XMFLOAT3{ 10.0f, 8.0f, 10.0f });
+	model->SetPosition(XMFLOAT3{ 10.0f, 10.0f, 10.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "painted-concrete");
 
-	model->SetPosition(XMFLOAT3{ 20.0f, 8.0f, 10.0f });
+	model->SetPosition(XMFLOAT3{ 20.0f, 10.0f, 10.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "marblefloortiles1");
 
-	model->SetPosition(XMFLOAT3{ 30.0f, 8.0f, 10.0f });
+	model->SetPosition(XMFLOAT3{ 30.0f, 10.0f, 10.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "pjdto2");
 
-	model->SetPosition(XMFLOAT3{ 40.0f, 8.0f, 10.0f });
+	model->SetPosition(XMFLOAT3{ 40.0f, 10.0f, 10.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "rusted-iron2");
 
-	model->SetPosition(XMFLOAT3{ 10.0f, 8.0f, 20.0f });
+	model->SetPosition(XMFLOAT3{ 10.0f, 15.0f, 20.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "scuffed-plastic");
 
-	model->SetPosition(XMFLOAT3{ 20.0f, 8.0f, 20.0f });
+	model->SetPosition(XMFLOAT3{ 20.0f, 15.0f, 20.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "subway-floor");
 
-	model->SetPosition(XMFLOAT3{ 30.0f, 8.0f, 20.0f });
+	model->SetPosition(XMFLOAT3{ 30.0f, 15.0f, 20.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "synth-rubber");
 
-	model->SetPosition(XMFLOAT3{ 40.0f, 8.0f, 20.0f });
+	model->SetPosition(XMFLOAT3{ 40.0f, 15.0f, 20.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "threadplatefloor");
 
-	model->SetPosition(XMFLOAT3{ 10.0f, 8.0f, 30.0f });
+	model->SetPosition(XMFLOAT3{ 10.0f, 20.0f, 30.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "bamboo-wood-semigloss");
 
-	model->SetPosition(XMFLOAT3{ 20.0f, 8.0f, 30.0f });
+	model->SetPosition(XMFLOAT3{ 20.0f, 20.0f, 30.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "greasy-pan-2");
 
-	model->SetPosition(XMFLOAT3{ 30.0f, 8.0f, 30.0f });
+	model->SetPosition(XMFLOAT3{ 30.0f, 20.0f, 30.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
 
 	model = new Model("Models/octopus.x", commandList, nullptr, "harshbricks");
 
-	model->SetPosition(XMFLOAT3{ 40.0f, 8.0f, 30.0f });
+	model->SetPosition(XMFLOAT3{ 40.0f, 20.0f, 30.0f });
 	model->SetRotation(XMFLOAT3{ -XM_PI / 2, 0, 0 });
 	model->SetScale(XMFLOAT3{ 1.0f, 1.0f, 1.0f });
 	mModels.push_back(model);
@@ -235,7 +235,7 @@ void App::LoadModels()
 	CreateLandscape();
 
 	mTerrainModel = new Model("", commandList, mTerrain->mMesh);
-
+	
 	// Sort models by PSO
 	int index = 0;
 	for (auto& model : mModels)
@@ -575,7 +575,7 @@ void App::Draw(float frameTime)
 	if (mWireframe) commandList->SetPipelineState(mGraphics->mWireframePSO.Get());
 	else commandList->SetPipelineState(mGraphics->mPlanetPSO.Get());
 
-	mTerrainModel->Draw(commandList);
+	//mTerrainModel->Draw(commandList);
 
 	// Set skybox pipeline state for sky 
 	commandList->SetPipelineState(mGraphics->mSkyPSO.Get());

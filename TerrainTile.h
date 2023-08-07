@@ -10,8 +10,8 @@ public:
 	TerrainChunk(ID3D12GraphicsCommandList* commandList, FastNoiseLite* noise, XMFLOAT3 position);
 	~TerrainChunk();
 	Mesh* mMesh;
-	int mSize = 100;
-	float mSpacing = 2.0f;
+	int mSize = 600;
+	float mSpacing = 1.0f;
 	XMFLOAT3 mPosition;
 private:
 	void CreateMeshGeometry(ID3D12GraphicsCommandList* commandList);
