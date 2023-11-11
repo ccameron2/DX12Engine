@@ -1,10 +1,11 @@
 #pragma once
+#include "d3dx12.h"
 
 #include "imgui.h"
 #include "imgui_impl_dx12.h"
 #include "imgui_impl_sdl.h"
 #include "SDL.h"
-#include "d3dx12.h"
+
 #include "SRVDescriptorHeap.h"
 #include "Model.h"
 
