@@ -22,6 +22,9 @@
     <Filter Include="ImGui">
       <UniqueIdentifier>{ac30d0b8-54d9-4e85-a9b5-8467d383d7b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\D3DX12">
+      <UniqueIdentifier>{d672dc96-de31-4986-8ea7-72b0aef801ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -138,7 +141,31 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="d3dx12.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\D3DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12_barriers.h">
+      <Filter>Header Files\D3DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12_core.h">
+      <Filter>Header Files\D3DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12_default.h">
+      <Filter>Header Files\D3DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12_pipeline_state_stream.h">
+      <Filter>Header Files\D3DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12_property_format_table.h">
+      <Filter>Header Files\D3DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12_render_pass.h">
+      <Filter>Header Files\D3DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12_resource_helpers.h">
+      <Filter>Header Files\D3DX12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12_root_signature.h">
+      <Filter>Header Files\D3DX12</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
