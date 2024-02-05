@@ -531,7 +531,7 @@ void App::Draw(float frameTime)
 	DrawModels(commandList);
 
 	// Execute commands
-	mGraphics->CloseAndExecuteCommandList(0, 0);
+	//mGraphics->CloseAndExecuteCommandList(0, 0);
 
 	//// Thread planet chunk rendering
 	//int start = 0;
@@ -565,12 +565,12 @@ void App::Draw(float frameTime)
 	//}
 
 	// Start a new command list
-	commandList = mGraphics->StartCommandList(0, 1);
+	//commandList = mGraphics->StartCommandList(0, 1);
 
 	// Setup command list
-	mGraphics->SetDescriptorHeapsAndRootSignature(0, 1);
-	mGraphics->SetViewportAndScissorRects(commandList);
-	mGraphics->SetMSAARenderTarget(commandList);
+	//mGraphics->SetDescriptorHeapsAndRootSignature(0, 1);
+	//mGraphics->SetViewportAndScissorRects(commandList);
+	//mGraphics->SetMSAARenderTarget(commandList);
 
 	if (mWireframe) commandList->SetPipelineState(mGraphics->mWireframePSO.Get());
 	else commandList->SetPipelineState(mGraphics->mPlanetPSO.Get());
@@ -588,7 +588,7 @@ void App::Draw(float frameTime)
 	mGUI->Render(commandList, mGraphics->CurrentBackBuffer(), mGraphics->CurrentBackBufferView(), mGraphics->mDSVHeap.Get(), mGraphics->mDsvDescriptorSize);
 
 	// Execute commands
-	mGraphics->CloseAndExecuteCommandList(0, 1);
+	mGraphics->CloseAndExecuteCommandList(0, 0);
 
 	// Swap back buffers with GUI vsync option
 	mGraphics->SwapBackBuffers(mGUI->mVSync);
